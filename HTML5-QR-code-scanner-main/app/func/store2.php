@@ -35,18 +35,29 @@ $result = $stmt->get_result();
 $existingRow = $result->fetch_assoc();
 
 if ($existingRow) {
-
- // Construct and encode the JSON response
- $response = array('status' => 'success', 'message' => 'QR code scanned successfully!');
- echo json_encode($response);
- header("Location: index.php");
- exit; // Stop further execution
-
-} else {
+    // Separate variables for redirect URL, QR code value, and additional data (optional)
+    $redirectUrl = "http://localhost/digital-e-signature-pad-with-saving-it-as-image-using-html2canvas-and-ajax-php/"; // Base URL
+    $qrcodeValue = $existingRow['student_id'];
+  
+    // Construct a single JSON response with distinct properties
+    $response = array(
+      'status' => 'success',
+      'message' => 'QR code scanned successfully!',
+      'redirect_url' => $redirectUrl,
+      'qrcode_value' => $qrcodeValue,
+    );
+  
+    // Send the JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit; // Stop further execution
+  }
+  else {
     // QR code not found in exam_log, display error
     http_response_code(200);
     echo json_encode(['status' => 'error', 'message' => 'QR code not recognized']);
 }
+
 } catch(Exception $e) {
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $e->getMessage()]);

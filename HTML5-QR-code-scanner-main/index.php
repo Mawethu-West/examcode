@@ -2,7 +2,7 @@
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-$base_url = 'http://localhost/HTML5-QR-CODE-SCANNER-MAIN/app/func/store.php';
+$base_url = 'http://localhost/HTML5-QR-CODE-SCANNER-MAIN/app/func/store2.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,8 +35,28 @@ $base_url = 'http://localhost/HTML5-QR-CODE-SCANNER-MAIN/app/func/store.php';
           const xmlhttp = new XMLHttpRequest();
           xmlhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-              console.log(xmlhttp.responseText);
-              const result = JSON.parse(xmlhttp.responseText);
+  console.log(xmlhttp.responseText);
+  const result = JSON.parse(xmlhttp.responseText);
+
+  if (result.status === 'success' && result.redirect_url) {
+    const redirectUrl = result.redirect_url;
+    window.location.href = redirectUrl;
+
+    // Access and store QR code value
+    const qrcodeValue = result.qrcode_value;
+    console.log(`QR Code Value: ${qrcodeValue}`);
+
+    // Choose storage method:
+    // 1. Local Storage:
+    window.localStorage.setItem('storedQrcode', qrcodeValue);
+
+    // 2. Session Storage (if needed for temporary usage):
+    // window.sessionStorage.setItem('storedQrcode', qrcodeValue);
+  } else {
+    // Handle error response (optional)
+    console.error("Error fetching response:", result);
+  }
+}
               const swalConfig = {
                 allowOutsideClick: false,
                 allowEscapeKey: false,

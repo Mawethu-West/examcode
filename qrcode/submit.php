@@ -28,7 +28,7 @@ $stmt = $conn->prepare('INSERT INTO images (image_data) VALUES (?)');
 $stmt->bind_param('s', $imageName);
 
 if ($stmt->execute()) {
-  echo 'Image successfully submitted';
+  echo 'Image successfully inserted';
 } else {
   echo 'Error submitting image: ' . $conn->error;
 }

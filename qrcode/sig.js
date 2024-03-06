@@ -60,7 +60,7 @@ const handlePointerDown = (event) => {
   ctx.moveTo(position.x, position.y);
 }
 
-ctx.lineWidth = 3;
+ctx.lineWidth = 1;
 ctx.lineJoin = ctx.lineCap = 'round';
 
 canvas.addEventListener('pointerdown', handlePointerDown, { passive: true });

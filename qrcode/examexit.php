@@ -45,7 +45,27 @@ $base_url = 'http://localhost/HTML5-QR-CODE-SCANNER-MAIN/app/func/store2.php';
           xmlhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
               console.log(xmlhttp.responseText);
-              const result = JSON.parse(xmlhttp.responseText);
+  const result = JSON.parse(xmlhttp.responseText);
+
+  if (result.status === 'success' && result.qrcode_value) {
+    const redirectUrl = result.redirect_url;
+
+    const qrcodeValue = result.qrcode_value; // Access QR code value
+    console.log(`QR Code Value: ${qrcodeValue}`);
+
+    if (qrcodeValue !== null && qrcodeValue !== undefined) {
+      // QR code is available, proceed with redirection and storage
+      window.location.href = redirectUrl;
+      window.localStorage.setItem('storedQrcode', qrcodeValue);
+    } else {
+      // Handle the case where QR code is not provided
+      console.error("QR code value is missing in response.");
+      // You might choose to display an error message or take other actions here
+    }
+  } else {
+    // Handle error response (or missing QR code)
+    console.error("Error fetching response or QR code not available:", result);
+  }
               const swalConfig = {
                 allowOutsideClick: false,
                 allowEscapeKey: false,

@@ -24,11 +24,11 @@ session_start();
     <div class="main-content"></div>
     <div class="page-content"></div>
     <div class="container">
-    <h1>Exam Details</h1>
+    <h1 color="blue">Exam Details</h1>
 <form action="examhandling.php" method="post">
     <fieldset>
  <label for="invigilator">Invigilator:</label>
- <input type="text"name="invigilator"placeholder="invigilator name" id="invigilator">
+ <input type="text"name="invigilator"placeholder="eg A Dube" id="invigilator">
 
 <label for="course_code">Course Code:</label>
  <?php
@@ -82,7 +82,7 @@ if ($courses) { // Check if any courses were found
 ?>
 
  <label for="date">Date:</label>
-   <input type="datetime" name="date" placeholder="2024/05/05" id="date">
+   <input type="datetime" name="date" placeholder="eg 2024/05/05" id="date">
 
 
 <label for="session">Session:</label>

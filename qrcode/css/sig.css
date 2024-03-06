@@ -38,12 +38,13 @@ p{
     width: 100%;
     background-color: var(--primary-color);
     border:solid 1px black;
-    border-radius: 2px;
+    border-radius: 3px;
     padding: 0.5rem 1rem;
     color: #fff;
     cursor: pointer;
     margin-top: 2rem;
     font-weight: 600;
+    transition: 0.3s;
 }
 .middle-canvas {
     position: relative;
@@ -52,7 +53,8 @@ p{
 .submit-button:hover{
     background-color: #fff;
     color: black;
-    border: 2px solid black;
+    border: 1px solid black;
+    transform: translateY(-5px);
 }
 @media(pointer:coarse){
     body{
